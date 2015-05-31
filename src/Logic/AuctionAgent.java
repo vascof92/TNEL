@@ -34,6 +34,7 @@ public class AuctionAgent implements Logic.IAuctionService {
 
     @AgentCreated
     public void init() {
+        System.out.printf("iniciou agente");
         this.balance =(double)1000;
         isProcessing = false;
         allProposals = new ArrayList<Proposal>();
@@ -50,12 +51,14 @@ public class AuctionAgent implements Logic.IAuctionService {
         public boolean checkRecur() {
 
             // The buyer's job is done when all required units have been purchased
-            return time <=120000;
+            return true;
         }
     }
 
     @Plan(trigger=@Trigger(goals=AuctionGoal.class))
     protected void launchRequestPlan() throws InterruptedException {
+
+        System.out.println("trigou");
 
         if (request != null) {
             if (!isProcessing) {
