@@ -80,7 +80,6 @@ public class AuctionAgentBDI implements IAuctionService {
 
     @AgentCreated
     public void init() {
-        System.out.printf("iniciou agente");
         this.balance =(double)1000;
         isProcessing = false;
         allProposals = new ArrayList<Proposal>();
@@ -125,7 +124,15 @@ public class AuctionAgentBDI implements IAuctionService {
     }
 
     @Override
-    public IFuture<Boolean> requireProposal(Request r) {
+    public IFuture<Boolean> requireProposal(Request r) { //in seller type agent, meaning seller agent receives this request from buyer//TODO REMOVE BEFORE DEPLOYMENT
+
+        //Verification if sender is receiver not to respond to own
+        if (this.agent.getAgentName().equals(r.ba.agent.getAgentName())) {
+            System.out.println("Sou eu tá quieto");
+        }
+        else{
+            System.out.println(this.agent.getAgentName() + " received request from " + r.ba.agent.getAgentName());
+        }
         return null;
     }
 
