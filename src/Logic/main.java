@@ -39,17 +39,9 @@ public class main {
         cms = SServiceProvider.getService(platform.getServiceProvider(),
                 IComponentManagementService.class, RequiredServiceInfo.SCOPE_PLATFORM).get(sus);
         cms.createComponent("Agent 1", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         cms.createComponent("Agent 2", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         cms.createComponent("Agent 3", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
        // JFrame Frame = new Menu(cms, sus, platform);
 

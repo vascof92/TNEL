@@ -3,6 +3,7 @@ package Logic;
 import jadex.bdiv3.BDIAgent;
 import jadex.bdiv3.annotation.*;
 import jadex.bdiv3.runtime.impl.PlanFailureException;
+import jadex.bridge.IComponentIdentifier;
 import jadex.bridge.service.RequiredServiceInfo;
 import jadex.bridge.service.annotation.Service;
 import jadex.bridge.service.search.SServiceProvider;
@@ -57,20 +58,26 @@ public class AuctionAgentBDI implements IAuctionService {
     @Plan(trigger=@Trigger(goals=AuctionGoal.class))
     protected void launchRequestPlan() throws InterruptedException {
 
-        System.out.println("trigou");
+
+        //System.out.println(isProcessing);
+
+
 
         if (request != null) {
             if (!isProcessing) {
                 processProposals();
             }} else {
-            request = new Request( this);
-            SServiceProvider.getServices(agent.getServiceProvider(), Logic.IAuctionService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IAuctionService>() {
-                public void intermediateResultAvailable(IAuctionService is) {
+            if(stock>0) {
+                System.out.println(agent.getAgentName() + " Lançou leilão. "+"Balance: "+balance+". Stock: "+stock);
+                request = new Request(this);
+                SServiceProvider.getServices(agent.getServiceProvider(), Logic.IAuctionService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IAuctionService>() {
+                    public void intermediateResultAvailable(IAuctionService is) {
 
-                    allProposals.clear();
-                    is.requireProposal(request.clone());
-                }
-            });
+                        allProposals.clear();
+                        is.requireProposal(request.clone());
+                    }
+                });
+            }
         }
 
 
@@ -111,7 +118,7 @@ public class AuctionAgentBDI implements IAuctionService {
         @Override
         public int compare(Proposal o1, Proposal o2) {
             // TODO Auto-generated method stub
-            if(o1.getPrice() > o2.getPrice())
+            if(o1.getPrice() < o2.getPrice())
             {
                 return 1;
             }
@@ -128,10 +135,21 @@ public class AuctionAgentBDI implements IAuctionService {
 
         //Verification if sender is receiver not to respond to own
         if (this.agent.getAgentName().equals(r.ba.agent.getAgentName())) {
-            System.out.println("Sou eu tá quieto");
+            //System.out.println("Sou eu tá quieto");
         }
         else{
-            System.out.println(this.agent.getAgentName() + " received request from " + r.ba.agent.getAgentName());
+            //System.out.println(this.agent.getAgentName() + " sent request to " + r.ba.agent.getAgentName());
+            int price = (int)(Math.random()*500)+1;
+            while(price > balance){
+                price = (int)(Math.random()*500)+1;
+            }
+            //System.out.println("price:  " + price);
+            Request req = r.clone();
+            Proposal p = new Proposal(req, price, this);
+            r.ba.sendProposal(p.clone());
+
+            return new Future<Boolean>(true);
+
         }
         return null;
     }
@@ -139,12 +157,18 @@ public class AuctionAgentBDI implements IAuctionService {
     @Override
     public IFuture<Boolean> acceptedProposal(Proposal p) {
 
+        System.out.println(this.agent.getAgentName()+" ganhou leilao e pagou "+ p.getPrice() );
+
 
         if(balance -p.getPrice()>=0) {
+
             stock++;
             balance -= p.getPrice();
+            System.out.println("Retirou "+p.getPrice() );
+            //System.out.println("Comprador: "+ agent.getAgentName());
+           // System.out.println("Balance"+ balance);
+            //System.out.println("stock"+ stock);
             return new Future<Boolean>(true);
-
         }else{
             return new Future<Boolean>(false);
         }
@@ -163,7 +187,7 @@ public class AuctionAgentBDI implements IAuctionService {
     @Override
     public IFuture<Boolean> sendProposal(Proposal p) {
 
-        System.out.println("Buyer received a valid proposal, analysing...");
+        // System.out.println("Buyer received a valid proposal, analysing...");
 
 
         allProposals.add(p);
@@ -181,7 +205,7 @@ public class AuctionAgentBDI implements IAuctionService {
     public void processProposals()
     {
 
-        System.out.println("Processing Proposal");
+        //System.out.println("Processing Proposal");
         isProcessing = true;
         int count = 1;
 
@@ -189,13 +213,26 @@ public class AuctionAgentBDI implements IAuctionService {
         final Proposal chosen2 = chooseProposal2();
 
 
+        //System.out.println("Leilão ganho por "+ chosen.getSa().agent.getAgentName()+ " com custo de "+ chosen.getPrice());
+        //System.out.println("Custo: "+ chosen2.getPrice());
+
 
         Proposal chosenClone2 = chosen2.clone();
 
+        System.out.println("seller: "+ agent.getAgentName()+ " | chosen: "+ chosen.getSa().agent.getAgentName()+"; chosen.price: "+chosen.getPrice()+" | chosen2: "+ chosen2.getSa().agent.getAgentName()+"; chosen2.price: "+chosen2.getPrice());
+        //System.out.println("chosen2: "+ chosen2.getSa().agent.getAgentName()+"; chosen2.price: "+chosen2.getPrice());
+
         if(chosen.getSa().acceptedProposal(chosenClone2).get()) {
+
+            //System.out.println("entrou");
 
             this.stock--;
             this.balance += chosenClone2.getPrice();
+            System.out.println("Adicionou "+chosenClone2.getPrice() );
+            //System.out.println(agent.getAgentName()+" recebeu "+ chosenClone2.getPrice()+"do "+ chosen.getSa().agent.getAgentName());
+           // System.out.println("Vendedor: "+ agent.getAgentName());
+          //  System.out.println("Balance"+ balance);
+          //  System.out.println("stock"+ stock);
 
         }
 
@@ -204,6 +241,8 @@ public class AuctionAgentBDI implements IAuctionService {
         request = null;
         isProcessing = false;
     }
+
+
 
 
 
