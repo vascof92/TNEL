@@ -4,10 +4,10 @@ public class Request extends CloneableObject {
 
 
 
-	public AuctionAgent ba;
+	public AuctionAgentBDI ba;
 
 	
-	public Request(AuctionAgent ba)
+	public Request(AuctionAgentBDI ba)
 	{
 		this.ba = ba;
 

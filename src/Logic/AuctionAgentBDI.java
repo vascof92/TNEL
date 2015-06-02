@@ -18,35 +18,34 @@ import java.util.Comparator;
 @Agent
 @Service
 @Description("This agent participates in auctions")
-@ProvidedServices(@ProvidedService(type= Logic.IAuctionService.class))
-public class AuctionAgent implements Logic.IAuctionService {
+@ProvidedServices(@ProvidedService(type= IAuctionService.class))
+public class AuctionAgentBDI implements IAuctionService {
 
     @Agent
     protected BDIAgent agent;
-    protected ArrayList<Proposal> allProposals;
-    protected Double balance;
-    protected Request request;
-    protected Boolean isProcessing;
-    protected Integer stock;
 
-    @Belief(updaterate=2000)
+    private ArrayList<Proposal> allProposals;
+    private Double balance;
+    private Request request;
+    private Boolean isProcessing;
+    private Integer stock;
+
+    @Belief(updaterate=1000)
     protected long time = System.currentTimeMillis();
 
-    @AgentCreated
-    public void init() {
-        System.out.printf("iniciou agente");
-        this.balance =(double)1000;
-        isProcessing = false;
-        allProposals = new ArrayList<Proposal>();
-        stock = (Integer)10;
 
-
+    @Plan(trigger=@Trigger(factchangeds = "time"))
+    protected void printTime(){
     }
+
     @Goal(recur=true)
     public class AuctionGoal {
         public AuctionGoal() {
 
+            this.units = 0;
         }
+
+        public int units;
         @GoalRecurCondition(beliefs="time")
         public boolean checkRecur() {
 
@@ -76,6 +75,21 @@ public class AuctionAgent implements Logic.IAuctionService {
 
 
         throw new PlanFailureException();
+    }
+
+
+    @AgentCreated
+    public void init() {
+        System.out.printf("iniciou agente");
+        this.balance =(double)1000;
+        isProcessing = false;
+        allProposals = new ArrayList<Proposal>();
+        stock = (Integer) 10;
+        this.agent.dispatchTopLevelGoal(new AuctionGoal());
+    }
+
+    @AgentBody
+    public void body(){
     }
 
 

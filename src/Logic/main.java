@@ -19,7 +19,7 @@ public class main {
 
         String[] defargs = new String[]
                 {
-                        "-gui", "true",
+                        "-gui", "false",
                         "-welcome", "false",
                         "-cli", "false",
                         "-printpass", "false"
@@ -38,7 +38,7 @@ public class main {
 
         cms = SServiceProvider.getService(platform.getServiceProvider(),
                 IComponentManagementService.class, RequiredServiceInfo.SCOPE_PLATFORM).get(sus);
-
+        cms.createComponent("Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
        // JFrame Frame = new Menu(cms, sus, platform);
 
     }

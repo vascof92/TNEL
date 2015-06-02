@@ -11,9 +11,9 @@ public class Proposal extends CloneableObject {
     private Request r;
 
 
-    private AuctionAgent sa;
+    private AuctionAgentBDI sa;
 
-    public Proposal( Request r, double price, AuctionAgent seller)
+    public Proposal( Request r, double price, AuctionAgentBDI seller)
     {
 
         this.price = price;
@@ -29,7 +29,7 @@ public class Proposal extends CloneableObject {
         return r;
     }
 
-    public AuctionAgent getSa() {
+    public AuctionAgentBDI getSa() {
         return sa;
     }
 
