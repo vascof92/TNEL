@@ -53,6 +53,7 @@ hs_err_pid*
 
 jcc.settings.xml
 JL-N53Jl.settings.xml
+auctionLog.txt
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
