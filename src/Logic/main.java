@@ -43,12 +43,20 @@ public class main {
                 IComponentManagementService.class, RequiredServiceInfo.SCOPE_PLATFORM).get(sus);
 
         Map<String, Object> agentArgs = new HashMap<String, Object>();
-        agentArgs.put("strategy",1 );
+        agentArgs.put("strategy", 1);
         CreationInfo BuyerInfo = new CreationInfo(agentArgs);
 
         Map<String, Object> agentArgs2 = new HashMap<String, Object>();
-        agentArgs2.put("strategy",2 );
+        agentArgs2.put("strategy", 2);
         CreationInfo BuyerInfo2 = new CreationInfo(agentArgs2);
+
+        cms.createComponent("Agent Manager", "Logic.ManagerAgentBDI.class", null).getFirstResult(sus);
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         cms.createComponent("Agent 1", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
 

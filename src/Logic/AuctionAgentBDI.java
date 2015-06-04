@@ -96,7 +96,7 @@ public class AuctionAgentBDI implements IAuctionService {
         allProposals = new ArrayList<Proposal>();
 
         stock = 10;
-        strategy = (int)agent.getArgument("strategy");
+        strategy = (Integer) agent.getArgument("strategy");
         System.out.println(strategy);
         this.agent.dispatchTopLevelGoal(new AuctionGoal());
     }
@@ -220,9 +220,19 @@ public class AuctionAgentBDI implements IAuctionService {
 
         if(chosen.getSa().acceptedProposal(chosenClone2).get()) {
 
+            final int finalPrice = (int)chosenClone2.getPrice();
 
             this.stock--;
-            this.balance += (int)chosenClone2.getPrice();
+            this.balance += finalPrice;
+
+            SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
+                public void intermediateResultAvailable(IManagerService is) {
+
+                    allProposals.clear();
+                    System.out.println(agent.getAgentName());
+                    is.submitFinalPrice(agent.getAgentName(), finalPrice);
+                }
+            });
 
 
 
@@ -237,6 +247,15 @@ public class AuctionAgentBDI implements IAuctionService {
 
     public int calculatePrice(int strategy){
 
+        SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
+            public void intermediateResultAvailable(IManagerService is) {
+
+                allProposals.clear();
+                System.out.println(agent.getAgentName());
+                Future<ArrayList<Integer>> prices = is.requestPriceList();
+                System.out.println("prices: " + prices.get());
+            }
+        });
 
         switch(strategy){
 
