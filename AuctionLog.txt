@@ -1,0 +1,20 @@
+Starting auctions!
+Starting auctions!
+Registered user: Agent 1
+Registered user: Agent 2
+Registered user: Agent 3
+Registered user: Agent 4
+Starting auctions!
+Registered user: Agent 1
+Registered user: Agent 2
+Registered user: Agent 3
+Registered user: Agent 4
+Agent 2 auction ended: Agent 1won and paid 796
+Agent 4 auction ended: Agent 1won and paid 966
+Agent 2 auction ended: Agent 3won and paid 1
+Agent 4 auction ended: Agent 2won and paid 662
+Agent 3 auction ended: Agent 2won and paid 1
+Agent 3 auction ended: Agent 4won and paid 567
+Agent 3 auction ended: Agent 4won and paid 567
+Agent 3 auction ended: Agent 4won and paid 567
+Agent 3 auction ended: Agent 4won and paid 567

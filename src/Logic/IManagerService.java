@@ -11,7 +11,9 @@ import java.util.ArrayList;
  */
 public interface IManagerService {
 
-    public IFuture<Boolean> submitFinalPrice(String ba, int price);
+    public IFuture<Boolean> registerAgent(Request r);
+
+    public IFuture<Boolean> submitFinalPrice(Submission s);
 
     public Future<ArrayList<Integer>> requestPriceList();
 }

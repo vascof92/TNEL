@@ -38,6 +38,7 @@ public class AuctionAgentBDI implements IAuctionService {
     private Integer strategy;
     private long starttime;
     private boolean ended;
+    private Request r;
     ArrayList<Integer> pricelist;
 
     @Belief(updaterate=1000)
@@ -112,11 +113,19 @@ public class AuctionAgentBDI implements IAuctionService {
         ended= false;
         strategy = (Integer) agent.getArgument("strategy");
         System.out.println(strategy);
+        this.r = new Request(this);
         this.agent.dispatchTopLevelGoal(new AuctionGoal());
+        SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
+            public void intermediateResultAvailable(IManagerService is) {
+                is.registerAgent(r);
+            }
+        });
+
     }
 
     @AgentBody
     public void body(){
+
     }
 
 
@@ -246,8 +255,7 @@ public class AuctionAgentBDI implements IAuctionService {
                 public void intermediateResultAvailable(IManagerService is) {
 
                     allProposals.clear();
-                    //System.out.println(agent.getAgentName());
-                    is.submitFinalPrice(agent.getAgentName(), finalPrice);
+                    is.submitFinalPrice(new Submission(chosen.getSa().agent.getAgentName(), finalPrice, r));
                 }
             });
 
