@@ -36,6 +36,9 @@ public class AuctionAgentBDI implements IAuctionService {
     private Boolean isProcessing;
     private Integer stock;
     private Integer strategy;
+    private long starttime;
+    private boolean ended;
+    ArrayList<Integer> pricelist;
 
     @Belief(updaterate=1000)
     protected long time = System.currentTimeMillis();
@@ -56,8 +59,17 @@ public class AuctionAgentBDI implements IAuctionService {
         @GoalRecurCondition(beliefs="time")
         public boolean checkRecur() {
 
-            // The buyer's job is done when all required units have been purchased
-            return true;
+
+            long end = (time-starttime);
+
+            if(end>12000 & !ended){
+                System.out.println(agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos");
+                ended = true;
+
+            }
+
+
+            return end <12000;
         }
     }
 
@@ -94,8 +106,9 @@ public class AuctionAgentBDI implements IAuctionService {
         this.balance =1000;
         isProcessing = false;
         allProposals = new ArrayList<Proposal>();
-
+        starttime = System.currentTimeMillis();
         stock = 10;
+        ended= false;
         strategy = (Integer) agent.getArgument("strategy");
         System.out.println(strategy);
         this.agent.dispatchTopLevelGoal(new AuctionGoal());
@@ -247,22 +260,37 @@ public class AuctionAgentBDI implements IAuctionService {
 
     public int calculatePrice(int strategy){
 
+
         SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
             public void intermediateResultAvailable(IManagerService is) {
 
                 allProposals.clear();
                 System.out.println(agent.getAgentName());
                 Future<ArrayList<Integer>> prices = is.requestPriceList();
+                pricelist = prices.get();
                 System.out.println("prices: " + prices.get());
             }
         });
 
         switch(strategy){
 
-            case 1:
+            case 1://all-in
                 return balance;
-            case 2:
+            case 2://balanced
                 return balance/2;
+            case 3://ruido
+                int bid = (int)((Math.random()*(balance/2))+(balance/2));
+                System.out.println("balance: "+balance+"; random bid: "+bid);
+                return bid;
+            case 4://média das ultimas 3
+                if(pricelist.size()>=3){
+                    int bid1 = pricelist.get(0);
+                    int bid2 = pricelist.get(1);
+                    int bid3 = pricelist.get(2);
+                    return ((bid1+bid2+bid3)/3);
+                }else{
+                    return 1;
+                }
 
         }
 
