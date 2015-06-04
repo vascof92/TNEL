@@ -58,33 +58,42 @@ public class main {
             e.printStackTrace();
         }
 
-        cms.createComponent("Average Bidder 1", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
-        cms.createComponent("Average Bidder 2", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
-        cms.createComponent("Average Bidder 3", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
-        cms.createComponent("Average Bidder 4", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
 
-        //cms.createComponent("Overbidder 1", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
-        //cms.createComponent("Overbidder 2", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
-       // cms.createComponent("Overbidder 3", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
-        cms.createComponent("Overbidder 4", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
 
 
         Map<String, Object> agentArgs3 = new HashMap<String, Object>();
         agentArgs3.put("strategy", 6);
         CreationInfo BuyerInfo3 = new CreationInfo(agentArgs3);
 
-       // cms.createComponent("Underbidder 1", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
-      //  cms.createComponent("Underbidder 2", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
-        cms.createComponent("Underbidder 3", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
-      //  cms.createComponent("Underbidder 4", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
+
+
+
 
 
         Map<String, Object> agentArgs4 = new HashMap<String, Object>();
         agentArgs4.put("strategy", 3);
         CreationInfo BuyerInfo4 = new CreationInfo(agentArgs4);
 
-       // cms.createComponent("Agent 4", "Logic.AuctionAgentBDI.class", BuyerInfo4).getFirstResult(sus);
 
+
+        for(int i=0; i<3;i++) {
+            String name ="Average Bidder" + i;
+            cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
+        }
+        for(int i=0; i<1;i++) {
+            String name ="Over Bidder" + i;
+            cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
+        }
+        for(int i=0; i<3;i++) {
+            String name ="Under Bidder" + i;
+            cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
+        }
+
+        for(int i=0; i<20;i++) {
+            String name = "Noise" + i;
+            cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo4).getFirstResult(sus);
+
+        }
 
 
 

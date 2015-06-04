@@ -56,6 +56,7 @@ public class ManagerAgentBDI implements IManagerService{
         writeToFile(submission);
         prices.add(s.price);
 
+        System.out.println(prices);
         return new Future<>(true);
     }
 

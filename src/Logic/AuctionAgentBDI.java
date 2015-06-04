@@ -79,7 +79,7 @@ public class AuctionAgentBDI implements IAuctionService {
     protected void launchRequestPlan() throws InterruptedException {
 
         if (request != null) {
-            System.out.println(agent.getAgentName()+" broke with "+ balance+"€ and "+stock+"price" );
+            //System.out.println(agent.getAgentName()+" broke with "+ balance+"€ and "+stock+"price" );
             if (!isProcessing) {
                 processProposals();
             }
@@ -105,14 +105,14 @@ public class AuctionAgentBDI implements IAuctionService {
 
     @AgentCreated
     public void init() {
-        this.balance =1000;
+        this.balance =10000;
         isProcessing = false;
         allProposals = new ArrayList<Proposal>();
         starttime = System.currentTimeMillis();
         stock = 10;
         ended= false;
         strategy = (Integer) agent.getArgument("strategy");
-        System.out.println(strategy);
+       // System.out.println(strategy);
         this.r = new Request(this);
         this.agent.dispatchTopLevelGoal(new AuctionGoal());
         SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
@@ -196,6 +196,7 @@ public class AuctionAgentBDI implements IAuctionService {
 
             stock++;
             balance -= (int)p.getPrice();
+
 
             return new Future<Boolean>(true);
         }else{
@@ -293,7 +294,7 @@ public class AuctionAgentBDI implements IAuctionService {
                 return balance/2;
             case 3://ruido
                 int bid = (int)((Math.random()*(balance/2))+(balance/2));
-                System.out.println("balance: "+balance+"; random bid: "+bid);
+
                 return bid;
             /*case 4://média das ultimas 3
                 if(pricelist.size()>=3){
@@ -348,34 +349,43 @@ public class AuctionAgentBDI implements IAuctionService {
                 }*/
             case 4://média das ultimas 3
                 if(pricelist.isEmpty()){
-                    return (int)((Math.random()*balance));
+                    bid = (int)((Math.random()*(balance)));
+
+                    return bid;
                 }
-                int average = (int)calculateAverage(pricelist);
+                int average = (int)(calculateAverage(pricelist)*deviation());
                 if(average<balance){
                     return average;
                 }else{
+
                     return balance;
                 }
 
             case 5://overbid
                 if(pricelist.isEmpty()){
-                    return (int)((Math.random()*balance));
+                    bid = (int)((Math.random()*(balance)));
+
+                    return bid;
                 }
-                average = (int)calculateAverage(pricelist);
+                average = (int)(calculateAverage(pricelist)*deviation());
                 if((int)(1.3*average)<balance){
                     return (int)(1.3*average);
                 }else{
+
                     return balance;
                 }
 
             case 6://underbid
                 if(pricelist.isEmpty()){
-                    return (int)((Math.random()*balance));
+                    bid = (int)((Math.random()*(balance)));
+
+                    return bid;
                 }
-                average = (int)calculateAverage(pricelist);
+                average = (int)(calculateAverage(pricelist)*deviation());
                 if((int)(0.7*average)<balance){
                     return (int)(0.7*average);
                 }else{
+
                     return balance;
                 }
 
@@ -397,6 +407,16 @@ public class AuctionAgentBDI implements IAuctionService {
             return sum.doubleValue() / marks.size();
         }
         return sum;
+    }
+
+
+    private double deviation(){
+
+        double deviation = 1+(((Math.random()*20)-10)/100);
+
+
+        return deviation;
+
     }
 
 
