@@ -80,7 +80,7 @@ public class main {
             String name ="Average Bidder" + i;
             cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
         }
-        for(int i=0; i<1;i++) {
+        for(int i=0; i<3;i++) {
             String name ="Over Bidder" + i;
             cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
         }
@@ -89,7 +89,7 @@ public class main {
             cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
         }
 
-        for(int i=0; i<20;i++) {
+        for(int i=0; i<5;i++) {
             String name = "Noise" + i;
             cms.createComponent(name, "Logic.AuctionAgentBDI.class", BuyerInfo4).getFirstResult(sus);
 

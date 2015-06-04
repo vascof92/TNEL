@@ -39,6 +39,8 @@ public class AuctionAgentBDI implements IAuctionService {
     private long starttime;
     private boolean ended;
     private Request r;
+    private int sells;
+    private int buys;
     ArrayList<Integer> pricelist;
 
     @Belief(updaterate=1000)
@@ -65,13 +67,13 @@ public class AuctionAgentBDI implements IAuctionService {
 
             if(end>60000 & !ended){
                 int value = (int)(balance + stock*calculateAverage(pricelist));
-                System.out.println(agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos. Valorizaçao = "+ value );
+                System.out.println(agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos. Valorizaçao = "+ value+". Comprou "+buys+" e vendeu "+sells );
                 ended = true;
 
             }
 
 
-            return end <60000;
+            return !ended;
         }
     }
 
@@ -88,6 +90,9 @@ public class AuctionAgentBDI implements IAuctionService {
             if(stock>0) {
                 //System.out.println(agent.getAgentName() + " Lançou leilão. "+"Balance: "+balance+". Stock: "+stock);
                 request = new Request(this);
+                long rand = (long)(Math.random()*1000);
+                Thread.sleep(rand);
+
                 SServiceProvider.getServices(agent.getServiceProvider(), Logic.IAuctionService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IAuctionService>() {
                     public void intermediateResultAvailable(IAuctionService is) {
 
@@ -110,6 +115,8 @@ public class AuctionAgentBDI implements IAuctionService {
         allProposals = new ArrayList<Proposal>();
         starttime = System.currentTimeMillis();
         stock = 10;
+        sells =0;
+        buys=0;
         ended= false;
         strategy = (Integer) agent.getArgument("strategy");
        // System.out.println(strategy);
@@ -195,6 +202,7 @@ public class AuctionAgentBDI implements IAuctionService {
         if(balance -p.getPrice()>=0) {
 
             stock++;
+            buys ++;
             balance -= (int)p.getPrice();
 
 
@@ -250,6 +258,7 @@ public class AuctionAgentBDI implements IAuctionService {
             final int finalPrice = (int)chosenClone2.getPrice();
 
             this.stock--;
+            sells++;
             this.balance += finalPrice;
 
             SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
