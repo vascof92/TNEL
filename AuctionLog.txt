@@ -1,0 +1,196 @@
+Starting auctions!
+Registered user: Average Bidder0
+Registered user: Average Bidder1
+Registered user: Average Bidder2
+Registered user: Over Bidder0
+Registered user: Under Bidder0
+Registered user: Under Bidder1
+Registered user: Under Bidder2
+Registered user: Noise0
+Registered user: Noise1
+Registered user: Noise2
+Registered user: Noise3
+Registered user: Noise4
+Registered user: Noise5
+Registered user: Noise6
+Registered user: Noise7
+Registered user: Noise8
+Registered user: Noise9
+Registered user: Noise10
+Registered user: Noise11
+Registered user: Noise12
+Registered user: Noise13
+Registered user: Noise14
+Registered user: Noise15
+Registered user: Noise16
+Registered user: Noise17
+Registered user: Noise18
+Registered user: Noise19
+Noise19 auction ended: Noise9 won and paid 9725
+Noise19 auction ended: Over Bidder0 won and paid 9963
+Noise19 auction ended: Average Bidder2 won and paid 10000
+Noise19 auction ended: Noise1 won and paid 6691
+Noise19 auction ended: Average Bidder1 won and paid 9927
+Noise19 auction ended: Noise11 won and paid 9099
+Noise19 auction ended: Noise16 won and paid 9604
+Noise19 auction ended: Noise8 won and paid 9780
+Noise19 auction ended: Average Bidder0 won and paid 9473
+Noise19 auction ended: Noise7 won and paid 8949
+Over Bidder0 acabou o dia com 37€ e 11 produtos. Valorizaçao = 103023
+Under Bidder0 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Average Bidder0 acabou o dia com 527€ e 11 produtos. Valorizaçao = 103513
+Average Bidder2 acabou o dia com 0€ e 11 produtos. Valorizaçao = 102986
+Average Bidder1 acabou o dia com 73€ e 11 produtos. Valorizaçao = 103059
+Under Bidder2 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Under Bidder1 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise1 acabou o dia com 3309€ e 11 produtos. Valorizaçao = 106295
+Noise0 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise2 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise3 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise4 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise5 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise6 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise7 acabou o dia com 1051€ e 11 produtos. Valorizaçao = 104037
+Noise8 acabou o dia com 220€ e 11 produtos. Valorizaçao = 103206
+Noise9 acabou o dia com 275€ e 11 produtos. Valorizaçao = 103261
+Noise10 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise11 acabou o dia com 901€ e 11 produtos. Valorizaçao = 103887
+Noise12 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise13 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise14 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise15 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise16 acabou o dia com 396€ e 11 produtos. Valorizaçao = 103382
+Noise17 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Noise18 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 103624
+Starting auctions!
+Registered user: Average Bidder0
+Registered user: Average Bidder1
+Registered user: Average Bidder2
+Registered user: Over Bidder0
+Registered user: Under Bidder0
+Registered user: Under Bidder1
+Registered user: Under Bidder2
+Registered user: Noise0
+Registered user: Noise1
+Registered user: Noise2
+Registered user: Noise3
+Registered user: Noise4
+Registered user: Noise5
+Registered user: Noise6
+Registered user: Noise7
+Registered user: Noise8
+Registered user: Noise9
+Registered user: Noise10
+Registered user: Noise11
+Registered user: Noise12
+Registered user: Noise13
+Registered user: Noise14
+Registered user: Noise15
+Registered user: Noise16
+Registered user: Noise17
+Registered user: Noise18
+Registered user: Noise19
+Noise19 auction ended: Noise9 won and paid 9212
+Noise19 auction ended: Over Bidder0 won and paid 9569
+Noise19 auction ended: Noise8 won and paid 9870
+Noise19 auction ended: Noise3 won and paid 7556
+Noise19 auction ended: Average Bidder1 won and paid 9495
+Noise19 auction ended: Noise18 won and paid 9442
+Noise19 auction ended: Noise12 won and paid 9082
+Noise19 auction ended: Noise15 won and paid 9353
+Noise19 auction ended: Average Bidder2 won and paid 8868
+Noise19 auction ended: Noise17 won and paid 8743
+Average Bidder0 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Over Bidder0 acabou o dia com 431€ e 11 produtos. Valorizaçao = 101199
+Average Bidder2 acabou o dia com 1132€ e 11 produtos. Valorizaçao = 101900
+Average Bidder1 acabou o dia com 505€ e 11 produtos. Valorizaçao = 101273
+Under Bidder0 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Under Bidder1 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Under Bidder2 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise0 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise1 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise2 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise3 acabou o dia com 2444€ e 11 produtos. Valorizaçao = 103212
+Noise4 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise6 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise5 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise7 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise8 acabou o dia com 130€ e 11 produtos. Valorizaçao = 100898
+Noise9 acabou o dia com 788€ e 11 produtos. Valorizaçao = 101556
+Noise10 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise11 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise12 acabou o dia com 918€ e 11 produtos. Valorizaçao = 101686
+Noise13 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise14 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise15 acabou o dia com 647€ e 11 produtos. Valorizaçao = 101415
+Noise16 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 101607
+Noise17 acabou o dia com 1257€ e 11 produtos. Valorizaçao = 102025
+Noise18 acabou o dia com 558€ e 11 produtos. Valorizaçao = 101326
+Starting auctions!
+Registered user: Average Bidder0
+Registered user: Average Bidder1
+Registered user: Average Bidder2
+Registered user: Over Bidder0
+Registered user: Under Bidder0
+Registered user: Under Bidder1
+Registered user: Under Bidder2
+Registered user: Noise0
+Registered user: Noise1
+Registered user: Noise2
+Registered user: Noise3
+Registered user: Noise4
+Registered user: Noise5
+Registered user: Noise6
+Registered user: Noise7
+Registered user: Noise8
+Registered user: Noise9
+Registered user: Noise10
+Registered user: Noise11
+Registered user: Noise12
+Registered user: Noise13
+Registered user: Noise14
+Registered user: Noise15
+Registered user: Noise16
+Registered user: Noise17
+Registered user: Noise18
+Registered user: Noise19
+Noise18 auction ended: Noise0 won and paid 8333
+Noise19 auction ended: Noise13 won and paid 9825
+Noise18 auction ended: Noise19 won and paid 10000
+Noise19 auction ended: Noise18 won and paid 10000
+Noise19 auction ended: Noise18 won and paid 10000
+Noise19 auction ended: Over Bidder0 won and paid 9893
+Noise19 auction ended: Average Bidder2 won and paid 9388
+Noise19 auction ended: Average Bidder0 won and paid 9082
+Noise19 auction ended: Average Bidder1 won and paid 9538
+Noise19 auction ended: Noise4 won and paid 9321
+Noise19 auction ended: Noise14 won and paid 9777
+Noise19 auction ended: Noise6 won and paid 9734
+Noise19 auction ended: Noise15 won and paid 9523
+Average Bidder0 acabou o dia com 918€ e 11 produtos. Valorizaçao = 106234
+Average Bidder1 acabou o dia com 462€ e 11 produtos. Valorizaçao = 105778
+Average Bidder2 acabou o dia com 612€ e 11 produtos. Valorizaçao = 105928
+Over Bidder0 acabou o dia com 107€ e 11 produtos. Valorizaçao = 105423
+Under Bidder2 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Under Bidder1 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Under Bidder0 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise0 acabou o dia com 1667€ e 11 produtos. Valorizaçao = 106983
+Noise1 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise2 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise3 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise4 acabou o dia com 679€ e 11 produtos. Valorizaçao = 105995
+Noise5 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise6 acabou o dia com 266€ e 11 produtos. Valorizaçao = 105582
+Noise7 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise8 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise10 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise9 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise11 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise12 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise13 acabou o dia com 175€ e 11 produtos. Valorizaçao = 105491
+Noise14 acabou o dia com 223€ e 11 produtos. Valorizaçao = 105539
+Noise15 acabou o dia com 477€ e 11 produtos. Valorizaçao = 105793
+Noise16 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise17 acabou o dia com 10000€ e 10 produtos. Valorizaçao = 105742
+Noise18 acabou o dia com 8333€ e 10 produtos. Valorizaçao = 104075
+Noise19 acabou o dia com 106081€ e 0 produtos. Valorizaçao = 106081

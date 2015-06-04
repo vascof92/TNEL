@@ -67,7 +67,14 @@ public class AuctionAgentBDI implements IAuctionService {
 
             if(end>60000 & !ended){
                 int value = (int)(balance + stock*calculateAverage(pricelist));
-                System.out.println(agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos. Valorizaçao = "+ value+". Comprou "+buys+" e vendeu "+sells );
+                
+                final String results = agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos. Valorizaçao = "+ value+". Comprou "+buys+" e vendeu "+sells;
+                System.out.println(results);
+                SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
+                    public void intermediateResultAvailable(IManagerService is) {
+                        is.finalResults(results);
+                    }
+                });
                 ended = true;
 
             }
@@ -288,7 +295,7 @@ public class AuctionAgentBDI implements IAuctionService {
 
                 allProposals.clear();
                 //System.out.println(agent.getAgentName());
-                Future<ArrayList<Integer>> prices = is.requestPriceList();
+                IFuture<ArrayList<Integer>> prices = is.requestPriceList();
                 pricelist = prices.get();
 
             }

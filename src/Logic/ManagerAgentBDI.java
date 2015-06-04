@@ -7,6 +7,7 @@ import jadex.commons.future.IFuture;
 import jadex.micro.annotation.*;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class ManagerAgentBDI implements IManagerService{
     protected BDIAgent agent;
 
     String logFile = "AuctionLog.txt";
+    File file;
 
     protected ArrayList<Integer> prices;
     protected ArrayList<AuctionAgentBDI> registeredAgents;
@@ -34,6 +36,7 @@ public class ManagerAgentBDI implements IManagerService{
     public void init(){
         prices = new ArrayList<>();
         registeredAgents = new ArrayList<>();
+        file = new File(logFile);
 
 
         writeToFile("Starting auctions!");
@@ -61,22 +64,37 @@ public class ManagerAgentBDI implements IManagerService{
     }
 
     @Override
-    public Future<ArrayList<Integer>> requestPriceList() {
+    public IFuture<ArrayList<Integer>> requestPriceList() {
 
         return new Future<>((ArrayList<Integer>) prices.clone());
+    }
+
+    @Override
+    public IFuture<Boolean> finalResults(String results) {
+        writeToFile(results);
+        return new Future<>();
     }
 
 
     public void writeToFile(String line){
         try{
-            FileWriter fileWriter = new FileWriter(logFile, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(line);
-            bufferedWriter.newLine();
+            if(file.exists()) {
+                FileWriter fileWriter = new FileWriter(logFile, true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
 
-            bufferedWriter.close();
+                bufferedWriter.close();
 
+            }
+            else{
+                FileWriter fileWriter = new FileWriter(logFile);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
 
+                bufferedWriter.close();
+            }
 
         }
         catch(IOException ex){

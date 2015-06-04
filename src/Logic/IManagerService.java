@@ -15,5 +15,7 @@ public interface IManagerService {
 
     public IFuture<Boolean> submitFinalPrice(Submission s);
 
-    public Future<ArrayList<Integer>> requestPriceList();
+    public IFuture<ArrayList<Integer>> requestPriceList();
+
+    public IFuture<Boolean> finalResults(String results);
 }
