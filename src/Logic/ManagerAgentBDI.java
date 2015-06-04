@@ -31,9 +31,9 @@ public class ManagerAgentBDI implements IManagerService{
 
     @Override
     public IFuture<Boolean> submitFinalPrice(String ba, int price) {
-        System.out.println("Preço submetido para análise..." + price + " por " + ba);
+        //System.out.println("Preço submetido para análise..." + price + " por " + ba);
         prices.add(price);
-
+        System.out.println("prices: " + prices);
         return new Future<>(true);
     }
 

@@ -43,11 +43,11 @@ public class main {
                 IComponentManagementService.class, RequiredServiceInfo.SCOPE_PLATFORM).get(sus);
 
         Map<String, Object> agentArgs = new HashMap<String, Object>();
-        agentArgs.put("strategy", 1);
+        agentArgs.put("strategy", 4);
         CreationInfo BuyerInfo = new CreationInfo(agentArgs);
 
         Map<String, Object> agentArgs2 = new HashMap<String, Object>();
-        agentArgs2.put("strategy", 2);
+        agentArgs2.put("strategy", 5);
         CreationInfo BuyerInfo2 = new CreationInfo(agentArgs2);
 
         cms.createComponent("Agent Manager", "Logic.ManagerAgentBDI.class", null).getFirstResult(sus);
@@ -58,22 +58,32 @@ public class main {
             e.printStackTrace();
         }
 
-        cms.createComponent("Agent 1", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
+        cms.createComponent("Average Bidder 1", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
+        cms.createComponent("Average Bidder 2", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
+        cms.createComponent("Average Bidder 3", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
+        cms.createComponent("Average Bidder 4", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
 
-        cms.createComponent("Agent 2", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
+        //cms.createComponent("Overbidder 1", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
+        //cms.createComponent("Overbidder 2", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
+       // cms.createComponent("Overbidder 3", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
+        cms.createComponent("Overbidder 4", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
 
 
         Map<String, Object> agentArgs3 = new HashMap<String, Object>();
-        agentArgs3.put("strategy", 3);
+        agentArgs3.put("strategy", 6);
         CreationInfo BuyerInfo3 = new CreationInfo(agentArgs3);
 
-        cms.createComponent("Agent 3", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
+       // cms.createComponent("Underbidder 1", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
+      //  cms.createComponent("Underbidder 2", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
+        cms.createComponent("Underbidder 3", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
+      //  cms.createComponent("Underbidder 4", "Logic.AuctionAgentBDI.class", BuyerInfo3).getFirstResult(sus);
+
 
         Map<String, Object> agentArgs4 = new HashMap<String, Object>();
-        agentArgs4.put("strategy", 4);
+        agentArgs4.put("strategy", 3);
         CreationInfo BuyerInfo4 = new CreationInfo(agentArgs4);
 
-        cms.createComponent("Agent 4", "Logic.AuctionAgentBDI.class", BuyerInfo4).getFirstResult(sus);
+       // cms.createComponent("Agent 4", "Logic.AuctionAgentBDI.class", BuyerInfo4).getFirstResult(sus);
 
 
 

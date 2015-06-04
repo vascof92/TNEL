@@ -62,14 +62,15 @@ public class AuctionAgentBDI implements IAuctionService {
 
             long end = (time-starttime);
 
-            if(end>12000 & !ended){
-                System.out.println(agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos");
+            if(end>60000 & !ended){
+                int value = (int)(balance + stock*calculateAverage(pricelist));
+                System.out.println(agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos. Valorizaçao = "+ value );
                 ended = true;
 
             }
 
 
-            return end <12000;
+            return end <60000;
         }
     }
 
@@ -77,14 +78,14 @@ public class AuctionAgentBDI implements IAuctionService {
     protected void launchRequestPlan() throws InterruptedException {
 
         if (request != null) {
-            System.out.println(agent.getAgentName()+" request != null");
+            System.out.println(agent.getAgentName()+" broke with "+ balance+"€ and "+stock+"price" );
             if (!isProcessing) {
                 processProposals();
             }
         }
         else {
             if(stock>0) {
-                System.out.println(agent.getAgentName() + " Lançou leilão. "+"Balance: "+balance+". Stock: "+stock);
+                //System.out.println(agent.getAgentName() + " Lançou leilão. "+"Balance: "+balance+". Stock: "+stock);
                 request = new Request(this);
                 SServiceProvider.getServices(agent.getServiceProvider(), Logic.IAuctionService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IAuctionService>() {
                     public void intermediateResultAvailable(IAuctionService is) {
@@ -130,6 +131,9 @@ public class AuctionAgentBDI implements IAuctionService {
     {
         proposalComparator comp = new proposalComparator();
         Collections.sort(allProposals, comp);
+        if(allProposals.size()==1){
+            return allProposals.get(0);
+        }
         return allProposals.get(1);
     }
 
@@ -242,7 +246,7 @@ public class AuctionAgentBDI implements IAuctionService {
                 public void intermediateResultAvailable(IManagerService is) {
 
                     allProposals.clear();
-                    System.out.println(agent.getAgentName());
+                    //System.out.println(agent.getAgentName());
                     is.submitFinalPrice(agent.getAgentName(), finalPrice);
                 }
             });
@@ -265,10 +269,10 @@ public class AuctionAgentBDI implements IAuctionService {
             public void intermediateResultAvailable(IManagerService is) {
 
                 allProposals.clear();
-                System.out.println(agent.getAgentName());
+                //System.out.println(agent.getAgentName());
                 Future<ArrayList<Integer>> prices = is.requestPriceList();
                 pricelist = prices.get();
-                System.out.println("prices: " + prices.get());
+
             }
         });
 
@@ -276,27 +280,115 @@ public class AuctionAgentBDI implements IAuctionService {
 
             case 1://all-in
                 return balance;
+
             case 2://balanced
                 return balance/2;
             case 3://ruido
                 int bid = (int)((Math.random()*(balance/2))+(balance/2));
                 System.out.println("balance: "+balance+"; random bid: "+bid);
                 return bid;
-            case 4://média das ultimas 3
+            /*case 4://média das ultimas 3
                 if(pricelist.size()>=3){
                     int bid1 = pricelist.get(0);
                     int bid2 = pricelist.get(1);
                     int bid3 = pricelist.get(2);
-                    return ((bid1+bid2+bid3)/3);
+                    int average = (bid1+bid2+bid3)/3;
+                    if(average<balance){
+                        return average;
+                    }else{
+                        return balance;
+                    }
                 }else{
-                    return 1;
+                    //return 1;
+                    bid = (int)((Math.random()*(balance/2)));
+                    System.out.println("balance: "+balance+"; random bid: "+bid);
+                    return bid;
                 }
+            case 5://overbid
+                if(pricelist.size()>=3){
+                    int bid1 = pricelist.get(0);
+                    int bid2 = pricelist.get(1);
+                    int bid3 = pricelist.get(2);
+                    int average = (bid1+bid2+bid3)/3;
+                    if((int)(1.3*average)<balance){
+                        return (int)(1.3*average);
+                    }else{
+                        return balance;
+                    }
+                }else{
+                    //return 1;
+                    bid = (int)((Math.random()*(balance/2)));
+                    System.out.println("balance: "+balance+"; random bid: "+bid);
+                    return bid;
+                }
+            case 6://underbid
+                if(pricelist.size()>=3){
+                    int bid1 = pricelist.get(0);
+                    int bid2 = pricelist.get(1);
+                    int bid3 = pricelist.get(2);
+                    int average = (bid1+bid2+bid3)/3;
+                    if((int)(0.7*average)<balance){
+                        return (int)(0.7*average);
+                    }else{
+                        return balance;
+                    }
+                }else{
+                    //return 1;
+                    bid = (int)((Math.random()*(balance/2)));
+                    System.out.println("balance: "+balance+"; random bid: "+bid);
+                    return bid;
+                }*/
+            case 4://média das ultimas 3
+                if(pricelist.isEmpty()){
+                    return (int)((Math.random()*balance));
+                }
+                int average = (int)calculateAverage(pricelist);
+                if(average<balance){
+                    return average;
+                }else{
+                    return balance;
+                }
+
+            case 5://overbid
+                if(pricelist.isEmpty()){
+                    return (int)((Math.random()*balance));
+                }
+                average = (int)calculateAverage(pricelist);
+                if((int)(1.3*average)<balance){
+                    return (int)(1.3*average);
+                }else{
+                    return balance;
+                }
+
+            case 6://underbid
+                if(pricelist.isEmpty()){
+                    return (int)((Math.random()*balance));
+                }
+                average = (int)calculateAverage(pricelist);
+                if((int)(0.7*average)<balance){
+                    return (int)(0.7*average);
+                }else{
+                    return balance;
+                }
+
 
         }
 
         return 0;
 
 
+    }
+
+
+    private double calculateAverage(ArrayList <Integer> marks) {
+        Integer sum = 0;
+        if(!marks.isEmpty()) {
+            for (Integer mark : marks) {
+                sum += mark;
+            }
+            return sum.doubleValue() / marks.size();
+        }
+        return sum;
     }
 
 
