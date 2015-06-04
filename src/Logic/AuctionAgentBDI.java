@@ -17,6 +17,11 @@ import java.util.Collections;
 import java.util.Comparator;
 
 @Agent
+@Arguments({
+
+        @Argument(name="strategy", clazz=Integer.class, defaultvalue="1")
+
+})
 @Service
 @Description("This agent participates in auctions")
 @ProvidedServices(@ProvidedService(type= IAuctionService.class))
@@ -91,7 +96,7 @@ public class AuctionAgentBDI implements IAuctionService {
         allProposals = new ArrayList<Proposal>();
 
         stock = 10;
-        strategy = (int)(Math.random()*2)+1;
+        strategy = (int)agent.getArgument("strategy");
         System.out.println(strategy);
         this.agent.dispatchTopLevelGoal(new AuctionGoal());
     }
@@ -218,6 +223,7 @@ public class AuctionAgentBDI implements IAuctionService {
 
             this.stock--;
             this.balance += (int)chosenClone2.getPrice();
+
 
 
         }

@@ -4,11 +4,14 @@ import jadex.base.Starter;
 import jadex.bridge.IExternalAccess;
 import jadex.bridge.service.RequiredServiceInfo;
 import jadex.bridge.service.search.SServiceProvider;
+import jadex.bridge.service.types.cms.CreationInfo;
 import jadex.bridge.service.types.cms.IComponentManagementService;
 import jadex.commons.future.IFuture;
 import jadex.commons.future.ThreadSuspendable;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jorgelima on 20-11-2014.
@@ -38,29 +41,25 @@ public class main {
 
         cms = SServiceProvider.getService(platform.getServiceProvider(),
                 IComponentManagementService.class, RequiredServiceInfo.SCOPE_PLATFORM).get(sus);
-        cms.createComponent("Agent 1", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
 
-        cms.createComponent("Agent 2", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        Map<String, Object> agentArgs = new HashMap<String, Object>();
+        agentArgs.put("strategy",1 );
+        CreationInfo BuyerInfo = new CreationInfo(agentArgs);
 
-        cms.createComponent("Agent 3", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        Map<String, Object> agentArgs2 = new HashMap<String, Object>();
+        agentArgs2.put("strategy",2 );
+        CreationInfo BuyerInfo2 = new CreationInfo(agentArgs2);
 
-        cms.createComponent("Agent 4", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
-        cms.createComponent("Agent 5", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        cms.createComponent("Agent 1", "Logic.AuctionAgentBDI.class", BuyerInfo).getFirstResult(sus);
 
-        cms.createComponent("Agent 6", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        cms.createComponent("Agent 2", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
 
-        cms.createComponent("Agent 7", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        cms.createComponent("Agent 3", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
 
-        cms.createComponent("Agent 8", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        cms.createComponent("Agent 4", "Logic.AuctionAgentBDI.class", BuyerInfo2).getFirstResult(sus);
 
-        cms.createComponent("Agent 9", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
-        cms.createComponent("Agent 10", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
 
-        cms.createComponent("Agent 11", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
 
-        cms.createComponent("Agent 12", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
-
-        cms.createComponent("Agent 13", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
 
 
     }
