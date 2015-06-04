@@ -43,7 +43,25 @@ public class main {
         cms.createComponent("Agent 2", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
 
         cms.createComponent("Agent 3", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
-       // JFrame Frame = new Menu(cms, sus, platform);
+
+        cms.createComponent("Agent 4", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        cms.createComponent("Agent 5", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
+        cms.createComponent("Agent 6", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
+        cms.createComponent("Agent 7", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
+        cms.createComponent("Agent 8", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
+        cms.createComponent("Agent 9", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+        cms.createComponent("Agent 10", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
+        cms.createComponent("Agent 11", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
+        cms.createComponent("Agent 12", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
+        cms.createComponent("Agent 13", "Logic.AuctionAgentBDI.class", null).getFirstResult(sus);
+
 
     }
 
