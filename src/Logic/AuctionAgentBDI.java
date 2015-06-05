@@ -67,7 +67,7 @@ public class AuctionAgentBDI implements IAuctionService {
 
             if(end>60000 & !ended){
                 int value = (int)(balance + stock*calculateAverage(pricelist));
-                
+
                 final String results = agent.getAgentName()+" acabou o dia com "+ balance+"€ e "+ stock+" produtos. Valorizaçao = "+ value+". Comprou "+buys+" e vendeu "+sells;
                 System.out.println(results);
                 SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
@@ -126,7 +126,7 @@ public class AuctionAgentBDI implements IAuctionService {
         buys=0;
         ended= false;
         strategy = (Integer) agent.getArgument("strategy");
-       // System.out.println(strategy);
+        // System.out.println(strategy);
         this.r = new Request(this);
         this.agent.dispatchTopLevelGoal(new AuctionGoal());
         SServiceProvider.getServices(agent.getServiceProvider(), Logic.IManagerService.class, RequiredServiceInfo.SCOPE_PLATFORM).addResultListener(new IntermediateDefaultResultListener<Logic.IManagerService>() {
@@ -189,7 +189,10 @@ public class AuctionAgentBDI implements IAuctionService {
             int price = calculatePrice(strategy);
 
 
+            if(price<=0){
+                return new Future<Boolean>(false);
 
+            }
             Request req = r.clone();
             Proposal p = new Proposal(req, price, this);
             r.ba.sendProposal(p.clone());
@@ -363,7 +366,7 @@ public class AuctionAgentBDI implements IAuctionService {
                     System.out.println("balance: "+balance+"; random bid: "+bid);
                     return bid;
                 }*/
-            case 4://média das ultimas 3
+            case 4://média
                 if(pricelist.isEmpty()){
                     bid = (int)((Math.random()*(balance)));
 
@@ -398,6 +401,57 @@ public class AuctionAgentBDI implements IAuctionService {
                     return bid;
                 }
                 average = (int)(calculateAverage(pricelist)*deviation());
+                if((int)(0.7*average)<balance){
+                    return (int)(0.7*average);
+                }else{
+
+                    return balance;
+                }
+
+            case 7://média das ultimas 3
+                if(pricelist.isEmpty()){
+                    bid = (int)((Math.random()*(balance)));
+
+                    return bid;
+                }
+                int bid1 = pricelist.get(pricelist.size()-1-0);
+                int bid2 = pricelist.get(pricelist.size()-1-1);
+                int bid3 = pricelist.get(pricelist.size()-1-2);
+                average = (bid1+bid2+bid3)/3;
+                if(average<balance){
+                    return average;
+                }else{
+
+                    return balance;
+                }
+
+            case 8://overbid
+                if(pricelist.isEmpty()){
+                    bid = (int)((Math.random()*(balance)));
+
+                    return bid;
+                }
+                bid1 = pricelist.get(pricelist.size()-1-0);
+                bid2 = pricelist.get(pricelist.size()-1-1);
+                bid3 = pricelist.get(pricelist.size()-1-2);
+                average = (bid1+bid2+bid3)/3;
+                if((int)(1.3*average)<balance){
+                    return (int)(1.3*average);
+                }else{
+
+                    return balance;
+                }
+
+            case 9://underbid
+                if(pricelist.isEmpty()){
+                    bid = (int)((Math.random()*(balance)));
+
+                    return bid;
+                }
+                bid1 = pricelist.get(pricelist.size()-1-0);
+                bid2 = pricelist.get(pricelist.size()-1-1);
+                bid3 = pricelist.get(pricelist.size()-1-2);
+                average = (bid1+bid2+bid3)/3;
                 if((int)(0.7*average)<balance){
                     return (int)(0.7*average);
                 }else{
